@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name = "author" content = "Veronica Marcella Angela Simalngo 2172042">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Soal 1</title>
+    <style>
+        
+
+        fieldset {
+            width : 500px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+        }
+        #kota {
+            font-size: xx-large;
+            background-color: rgb(0, 247, 255);
+            font-weight: bold;
+            text-align: center;
+        }
+        #negara {
+            background-color: rgb(0, 247, 255);
+            font-weight: bold;
+            text-align: center;
+        }
+        #koor {
+            background-color: rgb(0, 247, 255);
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        $.getJSON("cityList.json", function (result) {
+            for(i=1; i<result.city.length; i++){
+                $("#browsers").append("<option value='"+ result.city[i].name +"'>")
+            }
+        }) 
+        
+        function data(){
+            $.getJSON("cityList.json", function (result)  {
+            for(i=1; i<result.city.length; i++){
+                let a = document.querySelector("#browser").value
+                if(a==result.city[i].name){
+                $("#hasil").append("<div id='kota'>City name "+result.city[i].name + " (" + result.city[i].id + " ) </div>")
+                $("#hasil").append("<div id='negara'>Country "+result.city[i].country + " </div>")
+                $("#hasil").append("<div id='koor'>Coordinates (lat, lon) "+result.city[i].coord.lat + ", "+ result.city[i].coord.lon +" </div>")
+                }
+            }
+        }) 
+        
+        }
+    </script>
+    <fieldset> 
+    <legend>city</legend>
+    <label for="browser">Name:</label>
+    <input list="browsers" name="browser" id="browser">
+
+    <datalist id="browsers">
+
+    </datalist>
+    <button onclick="data()">Submit Query</button>
+    </fieldset>
+    <div id="hasil"></div>
+</body>
+</html>
